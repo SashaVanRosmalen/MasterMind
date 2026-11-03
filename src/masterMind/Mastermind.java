@@ -3,6 +3,8 @@ package masterMind;
 import java.util.Random;
  
 import java.util.Scanner;
+
+import jdk.internal.org.jline.terminal.TerminalBuilder.SystemOutput;
  
 public class Mastermind {
  
@@ -98,16 +100,26 @@ public class Mastermind {
  
 				// Feedback
 				System.out.println("\n=========================");
-				System.out.println("|" + codeMakerHole[0] + "|" + codeMakerHole[1] + "|" + codeMakerHole[2] + "|"
-						+ codeMakerHole[3] + "|");
-				System.out.println("=========================");
-				System.out.println("|" + codeBreakerHole[0] + "|" + codeBreakerHole[1] + "|" + codeBreakerHole[2] + "|"
-						+ codeBreakerHole[3] + "|");
-				System.out.println("=========================\n");
+				
+				for(int i; i < codeMakerHole.length; i++) {
+					System.out.println(codeMakerHole[i]);
+				}
+				
+				System.out.println("\n=========================");
+				System.out.print("|");
+				for (String pin : codeMakerHole) {
+					System.out.print(pin + "|");
+				}
+				System.out.println("\n=========================");
+				System.out.print("|");
+				for (String guess : codeMakerHole) {
+					System.out.print(guess + "|");
+				}
+				System.out.println("\n=========================\n");
 				
 				//win check
 				if (winCondition >= codeMakerHole.length) {
-					gamesWon += 1;
+					gamesWon ++;
 					System.out.println(WONTXT + "W in the chat. YOU WON!" + RESET);
 					System.out.println("You guessed the code in " + currentRow + " row(s)");
 					System.out.println("\nDo you want to play again? Yes|No");
@@ -125,7 +137,7 @@ public class Mastermind {
 						}
 						break;
 					}
-				} else if (currentRow == 10 && winCondition != codeMakerHole.length) {
+				} else if (currentRow == 10) {
 					System.out.println("You lost. L bozo \nyou Lost your win streak!\nhow are you so bad???");
 					break;
 				}
